@@ -12,6 +12,7 @@
 # $9: requirements-filepath
 
 
+cd "$1"
 for dir in $(ls -1)
  do
   if [[ $dir == *"."* ]]
@@ -25,7 +26,6 @@ if [ "$exit_code" != "0" ]; then
       printf "\npylint-odoo errors:\n-----------------\n%s\n-----------------\n" "$PYLINT_ERRORS"
       exit $exit_code
     fi
-
 
 if [ "$5" = false ]; then
   FLAKE8_ERRORS=$(python3 -m flake8 $2 "$1")
