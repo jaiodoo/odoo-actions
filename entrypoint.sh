@@ -19,7 +19,7 @@ for dir in $(ls -1)
    then
     continue
   fi
-   PYLINT_ERRORS+=$(/Users/jose/Programs/VirtualEnv/14.0/bin/python3 -m pylint --rcfile=/Users/jose/.pylintrc --load-plugins=pylint_odoo -d all -e odoolint "$dir")
+   PYLINT_ERRORS+=$(python3 -m pylint --rcfile=/.pylintrc --load-plugins=pylint_odoo -d all -e odoolint "$dir")
    exit_code=$?
 done
 if [ "$exit_code" != "0" ]; then
