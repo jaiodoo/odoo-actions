@@ -11,15 +11,21 @@
 # $8: mypy-ignore-dirs-files
 # $9: requirements-filepath
 
-if [ "$5" = false ]; then
-  PYLINT_ERRORS=$(python3 -m pylint --rcfile=/.pylintrc --load-plugins=pylint_odoo -d all -e odoolint "$1")
-  exit_code=$?
 
-  if [ "$exit_code" != "0" ]; then
-    printf "\npylint-odoo errors:\n-----------------\n%s\n-----------------\n" "$PYLINT_ERRORS"
-    exit $exit_code
+for dir in $(ls -1)
+ do
+  if [[ $dir == *"."* ]]
+   then
+    continue
   fi
-fi
+   PYLINT_ERRORS+=$(/Users/jose/Programs/VirtualEnv/14.0/bin/python3 -m pylint --rcfile=/Users/jose/.pylintrc --load-plugins=pylint_odoo -d all -e odoolint "$dir")
+   exit_code=$?
+done
+if [ "$exit_code" != "0" ]; then
+      printf "\npylint-odoo errors:\n-----------------\n%s\n-----------------\n" "$PYLINT_ERRORS"
+      exit $exit_code
+    fi
+
 
 if [ "$5" = false ]; then
   FLAKE8_ERRORS=$(python3 -m flake8 $2 "$1")
