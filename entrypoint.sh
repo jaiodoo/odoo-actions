@@ -27,6 +27,16 @@ if [ "$exit_code" != "0" ]; then
     fi
 
 
+if [ "$5" = false ]; then
+  FLAKE8_ERRORS=$(python3 -m flake8 $2 "$1")
+  exit_code=$?
+
+  if [ "$exit_code" != "0" ]; then
+    printf "\nflake8 errors:\n-----------------\n%s\n-----------------\n" "$FLAKE8_ERRORS"
+    exit $exit_code
+  fi
+fi
+
 mypy_omit_str=''
 mypy_omit_arr=($8)  # convert input str to array
 
