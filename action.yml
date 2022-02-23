@@ -1,11 +1,10 @@
-on: [push, pull_request]
+on: pull_request
 name: pylinter-odoo
 author: José Angel Inda Herrera
-description: Lint odoo python projects with flake8 pylint-odoo. The build will fail on violations.
+description: Lint odoo python projects with flake8 pylint-odoo. The build will fail on errors.
 branding:
   color: 'gray-dark'
   icon: 'check-circle'
-
 inputs:
   python-root:
     description: 'directory to run linting on'
@@ -18,10 +17,6 @@ inputs:
   skip-flake8:
     description: 'skip flake8 checks'
     required: false
-    default: false
-  skip-black:
-    description: 'skip-black'
-    required: false
     default: ''
 runs:
   using: 'docker'
@@ -30,4 +25,3 @@ runs:
     - ${{ inputs.python-root }}
     - ${{ inputs.flake8-flags }}
     - ${{ inputs.skip-flake8 }}
-    - ${{ inputs.skip-black }}
