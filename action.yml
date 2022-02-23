@@ -10,15 +10,19 @@ inputs:
   python-root:
     description: 'directory to run linting on'
     required: false
-    default: '.'
+    default: '.'  
   flake8-flags:
     description: 'flake8 flags'
     required: false
-    default: '--ignore=F401'
+    default: '--ignore=F401 --max-line-length=80'
   skip-flake8:
     description: 'skip flake8 checks'
     required: false
     default: false
+  skip-black:
+    description: 'skip-black'
+    required: false
+    default: ''
 runs:
   using: 'docker'
   image: docker://jainda/odoo-actions
@@ -26,3 +30,4 @@ runs:
     - ${{ inputs.python-root }}
     - ${{ inputs.flake8-flags }}
     - ${{ inputs.skip-flake8 }}
+    - ${{ inputs.skip-black }}
